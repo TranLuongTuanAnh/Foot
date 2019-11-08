@@ -609,6 +609,7 @@
 			baseConfigurationReference = 225C165F1F9B0FAA90EC5EDC /* Pods-AnhFootTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = D4PE3NA5E3;
 				INFOPLIST_FILE = AnhFootTests/Info.plist;

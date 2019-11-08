@@ -8,10 +8,19 @@ end
 
 platform :ios do
    # iOS Lanes
-   desc 'Fetch certificates and provisioning profiles'
-   lane :certificates do
-     match(app_identifier: 'com.app.bundle', type: 'development', readonly: true)
-     match(app_identifier: 'com.app.bundle', type: 'appstore', readonly: true)
+   desc "Bump and tag version"
+   lane :bump do
+     bump_message = "Bump build number."
+     # If our latest commit isn't a build bump, then bump the build.
+     build_is_already_bumped = last_git_commit[:message].include? bump_message
+     next if build_is_already_bumped
+     increment_build_number
+     commit_version_bump(
+       message: bump_message,
+       xcodeproj: "Project.xcodeproj"
+     )
+     add_git_tag
+     push_to_git_remote
    end
 end
 
